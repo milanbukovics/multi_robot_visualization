@@ -1,3 +1,4 @@
 [console_scripts]
 crazyflie_path_node = multi_robot.crazyflie_path_node:main
+multi_ranger_pointcloud_node = multi_robot.multi_ranger_pointcloud_node:main
 turtlebot_path_node = multi_robot.turtlebot_path_node:main
