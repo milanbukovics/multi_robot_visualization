@@ -10,8 +10,22 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/launch.py', 'launch/unified_multi_robot.launch.py']),
-        ('share/' + package_name + '/config', ['config/crazyflies.yaml', 'config/motion_capture.yaml']),
+        ('share/' + package_name + '/launch', [
+            'launch/launch.py',
+            'launch/unified_multi_robot.launch.py',
+            'launch/crazyflie_viz.launch.py',
+            'launch/turtlebot_viz.launch.py',
+        ]),
+        ('share/' + package_name + '/config', [
+            'config/crazyflies.yaml',
+            'config/motion_capture.yaml',
+            'config/slam_toolbox.yaml',
+        ]),
+        ('share/' + package_name + '/rviz', [
+            'rviz/crazyflie.rviz',
+            'rviz/turtlebot.rviz',
+            'rviz/multi_robot.rviz',
+        ]),
     ],
     install_requires=['setuptools', 'PyYAML'],
     zip_safe=True,
@@ -28,6 +42,7 @@ setup(
         'console_scripts': [
             'crazyflie_path_node = multi_robot.crazyflie_path_node:main',
             'turtlebot_path_node = multi_robot.turtlebot_path_node:main',
+            'multi_ranger_pointcloud_node = multi_robot.multi_ranger_pointcloud_node:main',
         ],
     },
 )

@@ -8,7 +8,6 @@ from launch_ros.actions import Node
 
 
 PACKAGE_NAME = 'multi_robot'
-TURTLEBOT_NAMESPACES = ['tb0', 'tb1', 'tb2', 'tb3', 'tb4']
 CFLIB_VENV_SITE_PACKAGES = '/home/drl/Desktop/Crazyflies/venv/lib/python3.12/site-packages'
 
 
@@ -28,13 +27,9 @@ def generate_launch_description():
 
     crazyflies_yaml_path = os.path.join(package_share, 'config', 'crazyflies.yaml')
     motion_capture_yaml_path = os.path.join(package_share, 'config', 'motion_capture.yaml')
-    slam_toolbox_yaml_path = os.path.join(package_share, 'config', 'slam_toolbox.yaml')
-    rviz_config_path = os.path.join(package_share, 'rviz', 'multi_robot.rviz')
+    rviz_config_path = os.path.join(package_share, 'rviz', 'crazyflie.rviz')
 
-    nodes = [SetEnvironmentVariable('PYTHONPATH', _pythonpath_with_venv())]
-
-    # Crazyflie bringup (server + robot_state_publishers per CF)
-    nodes.append(IncludeLaunchDescription(
+    crazyflie_bringup = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('crazyflie'), 'launch', 'launch.py')]
         ),
@@ -47,68 +42,37 @@ def generate_launch_description():
             'gui': 'False',
             'rviz': 'False',
         }.items(),
-    ))
+    )
 
-    # Crazyflie flight mission
-    nodes.append(Node(
+    crazyflie_path_node = Node(
         package=PACKAGE_NAME,
         executable='crazyflie_path_node',
         name='crazyflie_path_node',
         output='screen',
         parameters=[{'crazyflies_yaml_file': crazyflies_yaml_path}],
-    ))
+    )
 
-    # Multi-Ranger -> 3D PointCloud2 accumulator
-    nodes.append(Node(
+    pointcloud_node = Node(
         package=PACKAGE_NAME,
         executable='multi_ranger_pointcloud_node',
         name='multi_ranger_pointcloud_node',
         output='screen',
         parameters=[{'crazyflies_yaml_file': crazyflies_yaml_path}],
-    ))
+    )
 
-    # TurtleBot velocity commands
-    nodes.append(Node(
-        package=PACKAGE_NAME,
-        executable='turtlebot_path_node',
-        name='turtlebot_path_node',
-        output='screen',
-    ))
-
-    # Per-TurtleBot: static TF (world -> {ns}/map) + SLAM
-    for ns in TURTLEBOT_NAMESPACES:
-        nodes.append(Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name=f'static_tf_{ns}_map',
-            arguments=['0', '0', '0', '0', '0', '0', 'world', f'{ns}/map'],
-        ))
-
-        nodes.append(Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            namespace=ns,
-            output='screen',
-            parameters=[
-                slam_toolbox_yaml_path,
-                {
-                    'odom_frame': f'{ns}/odom',
-                    'map_frame': f'{ns}/map',
-                    'base_frame': f'{ns}/base_footprint',
-                    'scan_topic': f'/{ns}/scan',
-                },
-            ],
-        ))
-
-    # RViz
-    nodes.append(Node(
+    rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
         arguments=['-d', rviz_config_path],
         additional_env={'LD_LIBRARY_PATH': _clean_ld_library_path()},
-    ))
+    )
 
-    return LaunchDescription(nodes)
+    return LaunchDescription([
+        SetEnvironmentVariable('PYTHONPATH', _pythonpath_with_venv()),
+        crazyflie_bringup,
+        crazyflie_path_node,
+        pointcloud_node,
+        rviz_node,
+    ])
