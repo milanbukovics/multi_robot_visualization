@@ -13,8 +13,8 @@ import numpy as np
 import rclpy
 import yaml
 from ament_index_python.packages import get_package_share_directory
-from rclpy.duration import Duration
 from rclpy.node import Node
+from rclpy.time import Time
 from sensor_msgs.msg import LaserScan, PointCloud2, PointField
 from tf2_ros import Buffer, TransformException, TransformListener
 from tf_transformations import quaternion_matrix
@@ -38,15 +38,15 @@ class CrazyflieAccumulator:
             PointCloud2, f'/{cf_name}/pointcloud', 10)
 
     def _scan_cb(self, msg: LaserScan) -> None:
-        # Look up world -> drone frame at the scan's timestamp.
         try:
             tf = self._node.tf_buffer.lookup_transform(
                 self._world_frame,
                 msg.header.frame_id,
-                msg.header.stamp,
-                Duration(seconds=0.1),
+                Time(),
             )
-        except TransformException:
+        except TransformException as exc:
+            self._node.get_logger().warning(
+                f'TF lookup failed: {exc}', throttle_duration_sec=5.0)
             return
 
         q = tf.transform.rotation
