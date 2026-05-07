@@ -10,9 +10,15 @@
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
   <depend>ament_index_python</depend>
   <depend>crazyflie_interfaces</depend>
   <depend>crazyflie_py</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf_transformations</depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>turtlebot4_description</exec_depend>
 
 
   <test_depend>ament_copyright</test_depend>

@@ -15,14 +15,14 @@ robots:
     type: cf21  # see robot_types
 
   cfb3:  # FIXED: Added proper indentation (2 spaces)
-    enabled: true
+    enabled: false
     uri: radio://0/80/2M/E7E7E7E7B3
     initial_position: [0.0, -0.5, 0.0]
     type: cf21  # see robot_types
 
   cfb4:  # FIXED: Added proper indentation (2 spaces)
     enabled: true
-    uri: radio://0/80/2M/E7E7E7B4  
+    uri: radio://0/80/2M/E7E7E7E7B4
     initial_position: [0.0, 0.5, 0.0]
     type: cf21  # see robot_types
 
@@ -61,6 +61,8 @@ all:
     default_topics:
       pose:
         frequency: 10 # Hz
+      scan:
+        frequency: 10 # Hz   # Multi-Ranger horizontal rays -> /<cf>/scan (LaserScan)
       status:
         frequency: 1 # Hz
   firmware_params:
