@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: nav2-multi-tb
+Version: 0.1.0
+Summary: Multi-TurtleBot Nav2 formation controller
+Maintainer: drl
+Maintainer-email: cmilanes@hawaii.edu
+License: Apache-2.0
+Provides-Extra: test

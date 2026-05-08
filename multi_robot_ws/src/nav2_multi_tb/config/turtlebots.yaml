@@ -1,0 +1,37 @@
+# turtlebots.yaml — active robots for nav2_multi_tb
+#
+# Set enabled: true for every TurtleBot that is online and in the lab.
+# initial_position: [x, y, yaw_deg] of the robot at launch time in world frame.
+# These positions anchor the world→{ns}/map static TF.
+#
+# formation_slot: index in the formation line (0 = leader, 1 = first follower, …)
+# The formation_controller reads the order from this file.  Smaller slot = closer
+# to the final goal position.
+
+fileversion: 2
+
+robots:
+  tb0:
+    enabled: false
+    initial_position: [0.0, 0.0, 0.0]   # x, y, yaw_deg
+    formation_slot: 0                     # leader
+
+  tb1:
+    enabled: true
+    initial_position: [-0.8, 0.0, 0.0]
+    formation_slot: 0
+
+  tb2:
+    enabled: false
+    initial_position: [-1.6, 0.0, 0.0]
+    formation_slot: 2
+
+  tb3:
+    enabled: true
+    initial_position: [-2.4, 0.0, 0.0]
+    formation_slot: 1
+
+  tb4:
+    enabled: false
+    initial_position: [-3.2, 0.0, 0.0]
+    formation_slot: 1

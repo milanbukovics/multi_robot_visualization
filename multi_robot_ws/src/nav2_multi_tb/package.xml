@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>nav2_multi_tb</name>
+  <version>0.1.0</version>
+  <description>
+    Multi-TurtleBot Nav2 formation controller.
+    Drives tb0 to tb4 in a configurable line formation spaced by distance d,
+    with one Nav2 stack (SLAM + planner + controller + BT) per robot.
+  </description>
+  <maintainer email="cmilanes@hawaii.edu">drl</maintainer>
+  <license>Apache-2.0</license>
+
+  <!-- Python runtime -->
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>nav2_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>action_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>ament_index_python</depend>
+
+  <!-- Reuses turtlebot_odom_tf_node from multi_robot -->
+  <exec_depend>multi_robot</exec_depend>
+
+  <!-- Nav2 stack -->
+  <exec_depend>nav2_bt_navigator</exec_depend>
+  <exec_depend>nav2_controller</exec_depend>
+  <exec_depend>nav2_planner</exec_depend>
+  <exec_depend>nav2_behaviors</exec_depend>
+  <exec_depend>nav2_lifecycle_manager</exec_depend>
+  <exec_depend>nav2_navfn_planner</exec_depend>
+  <exec_depend>dwb_core</exec_depend>
+
+  <!-- SLAM -->
+  <exec_depend>slam_toolbox</exec_depend>
+
+  <!-- TF infrastructure -->
+  <exec_depend>topic_tools</exec_depend>
+
+  <!-- Visualisation -->
+  <exec_depend>rviz2</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

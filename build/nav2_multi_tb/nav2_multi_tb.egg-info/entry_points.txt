@@ -1,0 +1,3 @@
+[console_scripts]
+formation_controller = nav2_multi_tb.formation_controller_node:main
+formation_goal_publisher = nav2_multi_tb.formation_goal_publisher:main

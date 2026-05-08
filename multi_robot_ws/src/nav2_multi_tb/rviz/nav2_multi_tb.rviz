@@ -1,0 +1,97 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Alpha: 0.5
+      Cell Size: 1
+      Color: 160; 160; 164
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Normal Cell Count: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Alpha: 0.5
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 0.5
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Formation Goals
+      Marker Topic: /formation/goal_markers
+      Queue Size: 5
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: tb0/scan
+      Topic:
+        Value: /tb0/scan
+      Value: true
+      Size (m): 0.05
+      Color: 255; 0; 0
+    - Class: rviz_default_plugins/Map
+      Name: tb0/map
+      Topic:
+        Value: /tb0/map
+      Alpha: 0.7
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: tb1/scan
+      Topic:
+        Value: /tb1/scan
+      Value: true
+      Size (m): 0.05
+      Color: 0; 255; 0
+    - Class: rviz_default_plugins/Map
+      Name: tb1/map
+      Topic:
+        Value: /tb1/map
+      Alpha: 0.7
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: tb2/scan
+      Topic:
+        Value: /tb2/scan
+      Value: true
+      Size (m): 0.05
+      Color: 0; 0; 255
+    - Class: rviz_default_plugins/Map
+      Name: tb2/map
+      Topic:
+        Value: /tb2/map
+      Alpha: 0.7
+      Value: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Top-down view
+      Scale: 40
+      X: 2
+      Y: 0
