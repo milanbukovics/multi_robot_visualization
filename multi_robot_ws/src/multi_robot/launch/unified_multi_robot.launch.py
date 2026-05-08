@@ -35,6 +35,7 @@ def generate_launch_description():
 
     crazyflies_yaml_path = os.path.join(package_share, 'config', 'crazyflies.yaml')
     motion_capture_yaml_path = os.path.join(package_share, 'config', 'motion_capture.yaml')
+    slam_toolbox_yaml_path = os.path.join(package_share, 'config', 'slam_toolbox.yaml')
     rviz_config_path = os.path.join(package_share, 'rviz', 'multi_robot.rviz')
 
     enabled_turtlebots = _load_enabled_turtlebots(package_share)
@@ -85,10 +86,33 @@ def generate_launch_description():
         ))
 
         nodes.append(Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name=f'static_tf_{ns}_odom',
-            arguments=['0', '0', '0', '0', '0', '0', f'{ns}/map', 'odom'],
+            package='slam_toolbox',
+            executable='async_slam_toolbox_node',
+            name='slam_toolbox',
+            namespace=ns,
+            output='screen',
+            parameters=[
+                slam_toolbox_yaml_path,
+                {
+                    'odom_frame': 'odom',
+                    'map_frame': f'{ns}/map',
+                    'base_frame': 'base_link',
+                },
+            ],
+            remappings=[('/scan', f'/{ns}/scan')],
+        ))
+
+        nodes.append(Node(
+            package='nav2_lifecycle_manager',
+            executable='lifecycle_manager',
+            name=f'lifecycle_manager_slam_{ns}',
+            namespace=ns,
+            output='screen',
+            parameters=[{
+                'use_sim_time': False,
+                'autostart': True,
+                'node_names': ['slam_toolbox'],
+            }],
         ))
 
         # Convert /{ns}/odom nav_msgs/Odometry -> odom->base_link TF.
