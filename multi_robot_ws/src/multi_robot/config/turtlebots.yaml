@@ -1,0 +1,20 @@
+# named list of all TurtleBots
+# Mirrors crazyflies.yaml. Set enabled: true for any TB that is online.
+fileversion: 1
+
+robots:
+  tb0:
+    enabled: false
+    initial_position: [0.0, 0.0, 0.0]
+  tb1:
+    enabled: false
+    initial_position: [0.0, 0.0, 0.0]
+  tb2:
+    enabled: true
+    initial_position: [0.0, 0.0, 0.0]
+  tb3:
+    enabled: false
+    initial_position: [0.0, 0.0, 0.0]
+  tb4:
+    enabled: false
+    initial_position: [0.0, 0.0, 0.0]

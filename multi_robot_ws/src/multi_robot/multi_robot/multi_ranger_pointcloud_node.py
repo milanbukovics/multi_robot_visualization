@@ -17,7 +17,17 @@ from rclpy.node import Node
 from rclpy.time import Time
 from sensor_msgs.msg import LaserScan, PointCloud2, PointField
 from tf2_ros import Buffer, TransformException, TransformListener
-from tf_transformations import quaternion_matrix
+
+
+def _quat_to_rotmat(qx: float, qy: float, qz: float, qw: float) -> np.ndarray:
+    xx, yy, zz = qx * qx, qy * qy, qz * qz
+    xy, xz, yz = qx * qy, qx * qz, qy * qz
+    xw, yw, zw = qx * qw, qy * qw, qz * qw
+    return np.array([
+        [1 - 2 * (yy + zz), 2 * (xy - zw),     2 * (xz + yw)],
+        [2 * (xy + zw),     1 - 2 * (xx + zz), 2 * (yz - xw)],
+        [2 * (xz - yw),     2 * (yz + xw),     1 - 2 * (xx + yy)],
+    ])
 
 
 class CrazyflieAccumulator:
@@ -51,7 +61,7 @@ class CrazyflieAccumulator:
 
         q = tf.transform.rotation
         t = tf.transform.translation
-        rot = quaternion_matrix([q.x, q.y, q.z, q.w])[:3, :3]
+        rot = _quat_to_rotmat(q.x, q.y, q.z, q.w)
         translation = np.array([t.x, t.y, t.z])
 
         angle = msg.angle_min
