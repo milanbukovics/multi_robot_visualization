@@ -30,8 +30,11 @@ ros2 launch multi_robot unified_multi_robot.launch.py
 ## Turtlebot control
 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard \
-  --ros-args --remap cmd_vel:=/tb1/cmd_vel_unstamped \
-  -p qos_overrides./tb1/cmd_vel_unstamped.publisher.reliability:=best_effort
+  --ros-args --remap cmd_vel:=/tb2/cmd_vel_unstamped \
+  -p qos_overrides./tb2/cmd_vel_unstamped.publisher.reliability:=best_effort
 
+# Kill all previous ROS2 sessions with Ctrl + C
+
+rm -rf /dev/shm/fastrtps_*
 
 
