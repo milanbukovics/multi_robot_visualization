@@ -11,3 +11,9 @@ cd /home/drl/multi_robot_RViz/multi_robot_visualization/multi_robot_ws
 colcon build --symlink-install --packages-select multi_robot
 source install/setup.bash
 ros2 launch multi_robot turtlebot_viz.launch.py
+
+## teleop control 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard \
+  --ros-args \
+  --remap cmd_vel:=/tb2/cmd_vel_unstamped \
+  -p qos_overrides./tb2/cmd_vel_unstamped.publisher.reliability:=best_effort
