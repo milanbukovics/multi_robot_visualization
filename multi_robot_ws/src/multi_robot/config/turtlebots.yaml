@@ -7,10 +7,10 @@ robots:
     enabled: false
     initial_position: [0.0, 0.0, 0.0]
   tb1:
-    enabled: false
+    enabled: true
     initial_position: [0.0, 0.0, 0.0]
   tb2:
-    enabled: true
+    enabled: false
     initial_position: [0.0, 0.0, 0.0]
   tb3:
     enabled: false
