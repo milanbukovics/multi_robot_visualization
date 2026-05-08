@@ -55,7 +55,11 @@ def generate_launch_description():
                     'base_frame': 'base_link',
                 },
             ],
-            remappings=[('/scan', f'/{ns}/scan')],
+            remappings=[
+                ('/scan', f'/{ns}/scan'),
+                ('/map', f'/{ns}/map'),
+                ('/map_metadata', f'/{ns}/map_metadata'),
+            ],
         ))
 
         nodes.append(Node(
