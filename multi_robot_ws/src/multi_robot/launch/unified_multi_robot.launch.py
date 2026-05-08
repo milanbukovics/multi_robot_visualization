@@ -35,7 +35,6 @@ def generate_launch_description():
 
     crazyflies_yaml_path = os.path.join(package_share, 'config', 'crazyflies.yaml')
     motion_capture_yaml_path = os.path.join(package_share, 'config', 'motion_capture.yaml')
-    slam_toolbox_yaml_path = os.path.join(package_share, 'config', 'slam_toolbox.yaml')
     rviz_config_path = os.path.join(package_share, 'rviz', 'multi_robot.rviz')
 
     enabled_turtlebots = _load_enabled_turtlebots(package_share)
@@ -74,14 +73,6 @@ def generate_launch_description():
         name='multi_ranger_pointcloud_node',
         output='screen',
         parameters=[{'crazyflies_yaml_file': crazyflies_yaml_path}],
-    ))
-
-    # TurtleBot velocity commands
-    nodes.append(Node(
-        package=PACKAGE_NAME,
-        executable='turtlebot_path_node',
-        name='turtlebot_path_node',
-        output='screen',
     ))
 
     # Per-TurtleBot: static TF (world -> {ns}/map) + base frame bridge + SLAM + LIDAR cloud
