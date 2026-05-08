@@ -20,6 +20,7 @@ setup(
             'config/crazyflies.yaml',
             'config/motion_capture.yaml',
             'config/slam_toolbox.yaml',
+            'config/turtlebots.yaml',
         ]),
         ('share/' + package_name + '/rviz', [
             'rviz/crazyflie.rviz',
@@ -43,6 +44,8 @@ setup(
             'crazyflie_path_node = multi_robot.crazyflie_path_node:main',
             'turtlebot_path_node = multi_robot.turtlebot_path_node:main',
             'multi_ranger_pointcloud_node = multi_robot.multi_ranger_pointcloud_node:main',
+            'turtlebot_lidar_pointcloud_node = multi_robot.turtlebot_lidar_pointcloud_node:main',
+            'turtlebot_odom_tf_node = multi_robot.turtlebot_odom_tf_node:main',
         ],
     },
 )

@@ -4,6 +4,7 @@ setup.py
 config/crazyflies.yaml
 config/motion_capture.yaml
 config/slam_toolbox.yaml
+config/turtlebots.yaml
 launch/crazyflie_viz.launch.py
 launch/launch.py
 launch/turtlebot_viz.launch.py
@@ -11,6 +12,8 @@ launch/unified_multi_robot.launch.py
 multi_robot/__init__.py
 multi_robot/crazyflie_path_node.py
 multi_robot/multi_ranger_pointcloud_node.py
+multi_robot/turtlebot_lidar_pointcloud_node.py
+multi_robot/turtlebot_odom_tf_node.py
 multi_robot/turtlebot_path_node.py
 multi_robot.egg-info/PKG-INFO
 multi_robot.egg-info/SOURCES.txt
