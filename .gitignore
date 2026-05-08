@@ -422,3 +422,9 @@ FodyWeavers.xsd
 crazyswarm_ws/build/
 crazyswarm_ws/install/
 crazyswarm_ws/log/
+build/
+install/
+log/
+multi_robot_ws/build/
+multi_robot_ws/install/
+multi_robot_ws/log/
