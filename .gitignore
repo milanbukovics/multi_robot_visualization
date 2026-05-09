@@ -428,3 +428,5 @@ log/
 multi_robot_ws/build/
 multi_robot_ws/install/
 multi_robot_ws/log/
+# macOS
+.DS_Store
